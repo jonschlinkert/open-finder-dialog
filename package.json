@@ -1,0 +1,66 @@
+{
+  "name": "open-finder-dialog",
+  "description": "Open a finder dialog window (finder prompt) programmatically. Only works on MacOS.",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": {
+    "name": "Jon Schlinkert",
+    "email": "jon.schlinkert@sellside.com",
+    "url": "https://github.com/jonschlinkert"
+  },
+  "homepage": "https://github.com/jonschlinkert/open-finder-dialog",
+  "repository": "jonschlinkert/open-finder-dialog",
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/open-finder-dialog/issues"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "tsup": "npx tsup"
+  },
+  "dependencies": {
+    "detect-terminal": "^0.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.4",
+    "@typescript-eslint/eslint-plugin": "^8.7.0",
+    "@typescript-eslint/parser": "^8.7.0",
+    "esbuild-register": "^3.5.0",
+    "eslint": "^8.57.0",
+    "gulp-format-md": "^2.0.0",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.5.3"
+  },
+  "keywords": [
+    "dialog",
+    "explorer",
+    "file manager",
+    "file system",
+    "files",
+    "finder",
+    "open",
+    "prompt",
+    "terminal"
+  ],
+  "verb": {
+    "toc": false,
+    "layout": "default",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "reflinks": [
+      "verb"
+    ],
+    "lint": {
+      "reflinks": true
+    }
+  }
+}
