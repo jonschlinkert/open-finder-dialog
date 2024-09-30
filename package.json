@@ -1,7 +1,7 @@
 {
   "name": "open-finder-dialog",
   "description": "Open a finder dialog window (finder prompt) programmatically. Only works on MacOS.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "author": {
     "name": "Jon Schlinkert",
