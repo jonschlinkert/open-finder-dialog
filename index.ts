@@ -31,8 +31,8 @@ export const openFinderDialog = async (
         set text item delimiters to linefeed
         set posixPathsString to posixPaths as string
 
-        -- Return focus to iTerm2
-        tell application "iTerm2"
+        -- Return focus to ${terminal}
+        tell application "${terminal}"
           activate
         end tell
 
