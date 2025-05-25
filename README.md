@@ -124,10 +124,15 @@ Added support for specifying the terminal app.
 * **BREAKING CHANGE**: Functions now return an object with `files` and `canceled` properties, instead of just the selected files.
 * Added `filters` and `limit` options.
 
+### v1.0.1
+
+* Upgrade [detect-terminal](https://github.com/jonschlinkert/detect-terminal) to v1.1.0
+
 ## Related
 
 You might also be interested in:
 
+* [open-file-manager-dialog](https://www.npmjs.com/package/open-file-manager-dialog): Cross-platform library for opening a file manager dialog window programmatically on MacOS, Windows, or Linux. | [homepage](https://github.com/jonschlinkert/open-file-manager-dialog "Cross-platform library for opening a file manager dialog window programmatically on MacOS, Windows, or Linux.")
 * [open-file-manager](https://www.npmjs.com/package/open-file-manager): Cross-platform utility to open a file or directory in the system's default file manager (Finder… [more](https://github.com/jonschlinkert/open-file-manager) | [homepage](https://github.com/jonschlinkert/open-file-manager "Cross-platform utility to open a file or directory in the system's default file manager (Finder, Explorer, Nautilus, etc.)")
 * [open-linux-file-dialog](https://www.npmjs.com/package/open-linux-file-dialog): Open a file dialog window programmatically to allow the user to select one or more… [more](https://github.com/jonschlinkert/open-linux-file-dialog) | [homepage](https://github.com/jonschlinkert/open-linux-file-dialog "Open a file dialog window programmatically to allow the user to select one or more files. Only works on Linux. No dependencies. Supports zenity (GNOME), kdialog (KDE), yad (Yet Another Dialog), qarma (Qt-based), matedialog (MATE), rofi (window switcher wi")
 * [open-windows-file-dialog](https://www.npmjs.com/package/open-windows-file-dialog): Programmatically open a file dialog window (explorer) for picking files. Only works on Windows. Also… [more](https://github.com/jonschlinkert/open-windows-file-dialog) | [homepage](https://github.com/jonschlinkert/open-windows-file-dialog "Programmatically open a file dialog window (explorer) for picking files. Only works on Windows. Also see: open-finder-dialog, open-linux-file-dialog, and open-file-manager-dialog for other platforms.")
