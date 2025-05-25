@@ -1,13 +1,12 @@
 import readline from 'node:readline';
-import { openFinderDialog, openFinder } from '.';
+import { openFinderDialog } from '../index';
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-console.log('Press Ctrl + O to open a file.');
-// console.log('Press Ctrl + F to open Finder in the current directory.');
+console.log('Press Ctrl+O to open a file.');
 
 readline.emitKeypressEvents(process.stdin);
 
@@ -19,12 +18,16 @@ const files = [];
 
 process.stdin.on('keypress', async (str, key) => {
   if (key.ctrl && key.name === 'o') {
-    files.push(...(await openFinderDialog()).split(/(?<!\\)\s/));
-    return;
-  }
+    const result = await openFinderDialog(process.cwd(), { filters: ['md', 'json'] });
+    console.log(result);
 
-  if (key.ctrl && key.name === 'f') {
-    await openFinder('foo bar');
+    if (result.canceled) {
+      rl.close();
+      console.log('Canceled');
+      return;
+    }
+
+    files.push(...result.files);
     return;
   }
 
@@ -43,8 +46,4 @@ process.stdin.on('keypress', async (str, key) => {
     console.log('Exiting...');
     process.exit();
   }
-});
-
-rl.on('close', () => {
-  process.exit(0);
 });

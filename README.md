@@ -14,10 +14,19 @@ $ npm install --save open-finder-dialog
 
 ## Usage
 
+**Heads up!**: release v1.0.0 introduced breaking changes. Please see the [release history](#history) for details.
+
 ```typescript
 import { openFinderDialog } from 'open-finder-dialog';
 // or
 import openFinderDialog from 'open-finder-dialog';
+
+// Open the dialog in the current working directory
+const { files, canceled } = await openFinderDialog();
+console.log('Selected files:', files);
+// You can use the `canceled` property to determine if the user
+// canceled the dialog intentionally, so you can customize messaging
+// or logic accordingly.
 ```
 
 ## API
@@ -25,36 +34,103 @@ import openFinderDialog from 'open-finder-dialog';
 Signature:
 
 ```typescript
-export const openFinderDialog = async (filepath?: string, terminal?: string): Promise<string>;
+export const openFinderDialog = async (
+  initialDirectory?: string,
+  options?: {
+    filters?: string[];
+    limit?: number;
+    terminal?: string;
+  }
+): Promise<{ files: string[]; canceled: boolean; }>;
 ```
 
-Example usage:
+**Returns**
+
+A promise that resolves to an object:
+
+* `files`: an array of absolute POSIX file paths (as strings) that the user selected.
+* `canceled`: `true` if the user canceled the dialog, otherwise `false`.
+
+### Example usage
 
 ```ts
 // Open the dialog in the current working directory
-const selectedPaths = await openFinderDialog();
-console.log('Selected paths:', selectedPaths);
+const { files, canceled } = await openFinderDialog();
+console.log('Selected files:', files);
+
+if (canceled) {
+  console.log('User canceled the dialog');
+}
 ```
 
-Opens a Finder dialog to select files and returns the paths of selected files. You'll need to split these files into an array yourself, in case additional handling is required.
+Example with custom options:
+
+```ts
+const { files } = await openFinderDialog('/Users/alex/Pictures', {
+  limit: 2,
+  filters: ['jpeg', 'png', 'json'],
+  terminal: 'iTerm'
+});
+
+console.log('Selected files:', files);
+```
+
+Opens a Finder dialog to select one or more files and returns the paths of selected files. Handles single and multiple selections, ensures correct focus return to the terminal, and uses macOS native dialogs.
 
 ### Params
 
-**filepath** (optional)
+**initialDirectory** (optional)
 
 The initial directory where the dialog should open. Defaults to the current working directory.
 
 ```ts
-const selectedPaths = await openFinderDialog('/some/file/path.txt');
+const output = await openFinderDialog('/some/directory');
 ```
 
-**terminal** (optional)
+**options** (optional)
 
-Optionally specify a terminal app, so we can reliably return focus after the dialog is closed. By default, [detect-terminal](https://www.npmjs.com/package/detect-terminal) is used when no argument is passed.
+Options for the file dialog:
+
+* **filters**: `string[]` — File UTI types or extensions to filter (e.g. [`public.jpeg`, `public.png`] or file extensions depending on macOS support).
+* **limit**: `number` — Maximum number of files that can be selected (minimum 1, default: 100).
+* **terminal**: `string` — Optionally specify your terminal app name, so focus returns to it after closing the dialog. If not set, [detect-terminal](https://www.npmjs.com/package/detect-terminal) is used.
 
 ```ts
-const selectedPaths = await openFinderDialog(null, 'iterm');
+const output = await openFinderDialog(process.cwd(), {
+  filters: ['public.jpeg'],
+  limit: 1,
+  terminal: 'iTerm'
+});
 ```
+
+**Notes about "limit"**
+
+If you set a limit other than `1`, finder will not (cannot) prevent over-selection in the dialog. Meaning the user will potentially be able to select more than `limit` files. This is a limitation of the macOS Finder dialog, so the limit is enforced programmatically (by the applescript) after selection.
+
+AFAIK this is the only way it can be done, but I would love to have a better solution if someone wants to do a PR or open an issue to discuss.
+
+## History
+
+### v0.0.1
+
+Initial release
+
+### v0.0.2
+
+Added support for specifying the terminal app.
+
+### v1.0.0
+
+* **BREAKING CHANGE**: Functions now return an object with `files` and `canceled` properties, instead of just the selected files.
+* Added `filters` and `limit` options.
+
+## Related
+
+You might also be interested in:
+
+* [open-file-manager](https://www.npmjs.com/package/open-file-manager): Cross-platform utility to open a file or directory in the system's default file manager (Finder… [more](https://github.com/jonschlinkert/open-file-manager) | [homepage](https://github.com/jonschlinkert/open-file-manager "Cross-platform utility to open a file or directory in the system's default file manager (Finder, Explorer, Nautilus, etc.)")
+* [open-linux-file-dialog](https://www.npmjs.com/package/open-linux-file-dialog): Open a file dialog window programmatically to allow the user to select one or more… [more](https://github.com/jonschlinkert/open-linux-file-dialog) | [homepage](https://github.com/jonschlinkert/open-linux-file-dialog "Open a file dialog window programmatically to allow the user to select one or more files. Only works on Linux. No dependencies. Supports zenity (GNOME), kdialog (KDE), yad (Yet Another Dialog), qarma (Qt-based), matedialog (MATE), rofi (window switcher wi")
+* [open-windows-file-dialog](https://www.npmjs.com/package/open-windows-file-dialog): Programmatically open a file dialog window (explorer) for picking files. Only works on Windows. Also… [more](https://github.com/jonschlinkert/open-windows-file-dialog) | [homepage](https://github.com/jonschlinkert/open-windows-file-dialog "Programmatically open a file dialog window (explorer) for picking files. Only works on Windows. Also see: open-finder-dialog, open-linux-file-dialog, and open-file-manager-dialog for other platforms.")
 
 ## About
 
@@ -99,9 +175,9 @@ $ npm install -g verbose/verb#dev verb-generate-readme && verb
 
 ### License
 
-Copyright © 2024, [Jon Schlinkert](https://github.com/jonschlinkert).
+Copyright © 2025, [Jon Schlinkert](https://github.com/jonschlinkert).
 Released under the [MIT License](LICENSE).
 
 ***
 
-_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.8.0, on September 30, 2024._
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.8.0, on May 25, 2025._

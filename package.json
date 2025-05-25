@@ -3,11 +3,7 @@
   "description": "Open a finder dialog window (finder prompt) programmatically. Only works on MacOS.",
   "version": "0.0.2",
   "license": "MIT",
-  "author": {
-    "name": "Jon Schlinkert",
-    "email": "jon.schlinkert@sellside.com",
-    "url": "https://github.com/jonschlinkert"
-  },
+  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "homepage": "https://github.com/jonschlinkert/open-finder-dialog",
   "repository": "jonschlinkert/open-finder-dialog",
   "bugs": {
@@ -19,7 +15,10 @@
     "dist"
   ],
   "scripts": {
-    "tsup": "npx tsup"
+    "clean": "rm -rf dist",
+    "eslint": "npx eslint --ext .ts .",
+    "test": "ts-mocha -r esbuild-register 'test/*.test.ts' --exit",
+    "tsup": "npm run clean && npx tsup"
   },
   "dependencies": {
     "detect-terminal": "^0.0.2"
@@ -31,20 +30,38 @@
     "esbuild-register": "^3.5.0",
     "eslint": "^8.57.0",
     "gulp-format-md": "^2.0.0",
+    "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "tsup": "^8.3.0",
     "typescript": "^5.5.3"
   },
   "keywords": [
+    "desktop",
     "dialog",
-    "explorer",
+    "electron",
+    "file chooser",
+    "file dialog",
     "file manager",
+    "file picker",
+    "file selection dialog",
+    "file selection",
     "file system",
+    "file-browser",
+    "file-chooser",
+    "file-dialog",
+    "file-picker",
+    "file-selector",
+    "file-system",
     "files",
     "finder",
+    "gui",
+    "manager",
+    "native-dialog",
+    "open-file",
     "open",
     "prompt",
+    "select",
     "terminal"
   ],
   "verb": {
@@ -58,6 +75,12 @@
     ],
     "reflinks": [
       "verb"
+    ],
+    "related": [
+      "open-file-manager",
+      "open-file-manager-dialog",
+      "open-linux-file-dialog",
+      "open-windows-file-dialog"
     ],
     "lint": {
       "reflinks": true
